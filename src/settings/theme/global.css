@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Space Grotesk", Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 400;
+}
+
+html {
+  /* font size: 1rem = 10px */
+  font-size: 62.5%;
+  color: #fff;
+  background: #101313;
+}
+
+body {
+  /* default font size set as 16px */
+  font-size: 1.6rem;
+}
+
+h2 {
+  font-size: 3.2rem;
+  line-height: 3.8rem;
+}
+
+h3 {
+  font-size: 2rem;
+  line-height: 2.4rem;
+}

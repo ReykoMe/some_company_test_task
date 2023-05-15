@@ -1,4 +1,7 @@
-import { StepperProps, StepperStackProps } from "./types";
+import {
+  StepperContainerProps,
+  StepperStackProps,
+} from "./types";
 import styled from "@emotion/styled/macro";
 
 export const StepperPoint = styled.div`
@@ -50,7 +53,7 @@ export const StepperStepWrapper = styled.div`
   align-items: center;
 `;
 
-export const StepperContainer = styled.div<StepperProps>`
+export const StepperContainer = styled.div<StepperContainerProps>`
   display: flex;
   align-items: center;
   ${(props) =>
@@ -65,7 +68,7 @@ export const StepperContainer = styled.div<StepperProps>`
         ${StepperSeparator} {
             height: 4rem;
             min-width: 1px;
-            margin: 0.5rem 0.25rem;
+            margin: 0.5rem 0.4rem;
           }
   `}
 `;

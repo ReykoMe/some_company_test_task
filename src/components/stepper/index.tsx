@@ -2,11 +2,9 @@ import React from "react"
 import { StepperPoint, StepperSeparator, StepperContainer, StepperStack, StepperStepWrapper, StepperStepLabel } from "./styles"
 import { StepperProps, StepperStackProps } from "./types"
 
-const steps = ["Create", "Update", "Delete"]
 
 export const Stepper: React.FC<StepperProps> = (props) => {
-  const {vertical, isHideLabels } = props
-  const currentStep = 1
+  const {vertical, isHideLabels, steps, currentStep } = props
   const isLastStep = (index: number) => {
     return index === steps.length - 1
   }

@@ -1,12 +1,14 @@
 import React from "react"
-import {InputAdornment, InputBase, InputContainer, InputLabel, InputSectionWrapper} from './styles';
-export const Input: React.FC = () => {
+import {InputBeforeText, InputBase, InputContainer, InputLabel, InputSectionWrapper} from './styles';
+import { InputProps } from "./types";
+export const Input: React.FC<InputProps> = (props) => {
+  const {value, beforeText,label, placeholder, onChange } = props
   return (
     <InputContainer>
-      <InputLabel>Project Name (It can be changed later)</InputLabel>
+      {label && <InputLabel>{label}</InputLabel>}
       <InputSectionWrapper>
-        <InputAdornment>Alphaguilty.io/</InputAdornment>
-        <InputBase defaultValue="awesomenftpunch" />
+        {beforeText && <InputBeforeText>{beforeText}</InputBeforeText>}
+        <InputBase value={value} onChange={onChange} placeholder={placeholder} />
       </InputSectionWrapper>
     </InputContainer>
   );

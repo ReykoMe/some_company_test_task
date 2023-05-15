@@ -12,6 +12,12 @@ html {
   font-size: 62.5%;
   color: #fff;
   background: #101313;
+  height: 100vh;
+  overflow: auto;
+}
+
+body, #root {
+  height: 100%;
 }
 
 body, span, input {

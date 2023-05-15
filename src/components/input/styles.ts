@@ -7,6 +7,7 @@ export const InputContainer = styled.div`
 `
 
 export const InputLabel = styled.span`
+  margin-bottom: 0.5rem;
 
 `
 export const InputSectionWrapper = styled.div`
@@ -16,7 +17,8 @@ export const InputSectionWrapper = styled.div`
   border: ${({ theme }) => `1px solid ${theme.colors.border.input}`};
   border-radius: ${({ theme }) => theme.decorations.borderRadius.normal};
 `;
-export const InputAdornment = styled.span`
+
+export const InputBeforeText = styled.span`
   min-width: max-content;
   line-height: 2.2rem;
   margin-right: 0.5rem;

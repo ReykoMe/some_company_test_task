@@ -8,11 +8,13 @@ export const appTheme: AppTheme = {
     background: {
       primary: {
         main: "#101313",
-        light: "rgba(250, 250, 250, 0.1)",
+        dark: "rgba(250, 250, 250, 0.1)",
+        light: "#222424",
       },
       secondary: {
         main: "#2B8CE6",
-        light: "rgba(33, 122, 255, 0.1)",
+        dark: "rgba(33, 122, 255, 0.1)",
+        light: "#539adb",
       },
     },
     font: {

@@ -14,9 +14,10 @@ html {
   background: #101313;
 }
 
-body {
+body, span, input {
   /* default font size set as 16px */
   font-size: 1.6rem;
+  line-height: 2.2rem;
 }
 
 h2 {
@@ -28,3 +29,4 @@ h3 {
   font-size: 2rem;
   line-height: 2.4rem;
 }
+

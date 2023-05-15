@@ -3,11 +3,13 @@ export type AppTheme = {
     background: {
       primary: {
         main: string;
-        light: string;
+        dark: string;
+        light: string
       };
       secondary: {
         main: string;
-        light: string;
+        dark: string;
+        light: string
       };
     };
     font: {

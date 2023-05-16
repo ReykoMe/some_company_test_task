@@ -4,27 +4,23 @@ import { RadioInput } from "../../../components/radio-input/index";
 import { Typography } from "../../../components/typography";
 import { FormScreenProps } from "./types";
 import { inputWrapperStyles } from "./styles";
-
-const GOALS = [
-  "Grow My Community",
-  "Activate Existing Members",
-  "Understand My Members",
-  "Other",
-];
+import { useTranslation } from "../../../hooks/use-translation";
 
 export const ProjectDetails: React.FC<FormScreenProps> = (props) => {
   const { onClickNext, onClickPrev, getInputProps, isMobile } = props;
-
+  const { projectForm } = useTranslation("us");
+  const t = projectForm.projectDetails;
   return (
     <>
       <Wrap sx={{ flexDirection: "column", marginBottom: "2.8rem" }}>
-        <Typography color="tertiary">Project Details</Typography>
-        <Typography component="h2">
-          What is your main goal with AlphaQuest?
-        </Typography>
+        <Typography color="tertiary">{t.headers.main}</Typography>
+        <Typography component="h2">{t.headers.subheader}</Typography>
       </Wrap>
       <Wrap sx={inputWrapperStyles}>
-        <RadioInput choices={GOALS} {...getInputProps("goals")} />
+        <RadioInput
+          choices={t.inputs.goalsChoices}
+          {...getInputProps("goals")}
+        />
       </Wrap>
       <Wrap>
         <Wrap
@@ -35,11 +31,11 @@ export const ProjectDetails: React.FC<FormScreenProps> = (props) => {
           }}
         >
           <Button secondary onClick={onClickPrev}>
-            Back
+            {t.buttons.back}
           </Button>
         </Wrap>
         <Wrap sx={{ maxWidth: isMobile ? "100%" : "12rem", width: "100%" }}>
-          <Button onClick={onClickNext}>Continue</Button>
+          <Button onClick={onClickNext}>{t.buttons.continue}</Button>
         </Wrap>
       </Wrap>
     </>

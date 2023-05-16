@@ -10,14 +10,26 @@ import { useForm } from "./hooks/use-form";
 import { Wrap } from "./components/wrap";
 import { useMediaQuery } from "./hooks/use-media-query";
 import { useCounter } from "./hooks/use-couter";
+import { translations } from "./settings/translations";
 
-const screens = [
-  { title: "Start First Project", Component: AddNewProject },
-  { title: "Project Details", Component: ProjectDetails },
-  { title: "Create Project", Component: CreateProject },
+const {stepper, createProject, projectDetails} = translations.us.projectForm
+
+const formScreens = [
+  {
+    title: stepper.startFirstProject,
+    Component: AddNewProject
+  },
+  {
+    title: stepper.projectDetails,
+    Component: ProjectDetails
+  },
+  {
+    title: stepper.createProject,
+    Component: CreateProject
+  },
 ];
 
-const STEPS = screens.map((el) => el.title);
+const STEPS = formScreens.map((el) => el.title);
 
 type FormDataType = {
   projectName: string;
@@ -32,20 +44,20 @@ type FormDataType = {
 const defaultValues: Partial<FormDataType> = {
   contactEmail: "mail@mail.com",
   workersCount: "0",
-  postProductLaunches: "Pre Product",
-  goals: "Grow My Community",
+  postProductLaunches: createProject.inputs.postProductLaunchChoices[0],
+  goals: projectDetails.inputs.goalsChoices[0],
 };
 
 const App: React.FC = () => {
   const form = useForm<Partial<FormDataType>>({ defaultValues });
   const isSmScreen = useMediaQuery("sm");
-  
+
   const { currentStep, next, prev } = useCounter({
     maxValue: STEPS.length - 1,
     onLastValue: form.handleSubmit,
   });
 
-  const { Component: FormScreen } = screens[currentStep];
+  const { Component: FormScreen } = formScreens[currentStep];
 
   return (
     <MainLayout

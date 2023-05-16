@@ -5,56 +5,43 @@ import { ChipInput } from "../../../components/chip-input";
 import { Typography } from "../../../components/typography";
 import { FormScreenProps } from "./types";
 import { inputWrapperStyles } from "./styles";
-
-const TYPE_CHOICES = [
-  "NFT",
-  "GameFi",
-  "DeFi",
-  "DAO",
-  "SocialFi",
-  "Metaverse",
-  "Tools",
-  "Ecosystem",
-  "Others",
-];
-
+import { useTranslation } from "../../../hooks/use-translation";
 
 export const AddNewProject: React.FC<FormScreenProps> = (props) => {
   const { onClickNext, getInputProps, isMobile } = props;
-
+  const { projectForm } = useTranslation("us");
+  const t = projectForm.addProject;
   return (
     <>
       <Wrap sx={{ marginBottom: "0.8rem" }}>
-        <Typography color="tertiary">
-          To Create Quest you need firstly create Project
-        </Typography>
+        <Typography color="tertiary">{t.headers.main}</Typography>
       </Wrap>
       <Wrap sx={inputWrapperStyles}>
-        <Typography component="h2">Add New Project</Typography>
+        <Typography component="h2">{t.headers.subheader}</Typography>
       </Wrap>
       <Wrap sx={inputWrapperStyles}>
         <Input
-          label="Project Name (It can be changed later)"
+          label={t.inputs.labels.projectName}
           {...getInputProps("projectName")}
         />
       </Wrap>
       <Wrap sx={inputWrapperStyles}>
         <Input
-          label="Project URL (It cannot be changed after creation)"
+          label={t.inputs.labels.projectUrl}
           beforeText="Alphaguilty.io/"
           {...getInputProps("projectUrl")}
         />
       </Wrap>
       <Wrap sx={inputWrapperStyles}>
         <ChipInput
-          choices={TYPE_CHOICES}
-          label="Project Category (It cannot be changed after creation)"
+          choices={t.inputs.projectTypeChoices}
+          label={t.inputs.labels.projectType}
           {...getInputProps("projectType")}
         />
       </Wrap>
 
       <Wrap sx={{ maxWidth: isMobile ? "100%" : "32.8rem", width: "100%" }}>
-        <Button onClick={onClickNext}>Add project</Button>
+        <Button onClick={onClickNext}>{t.buttons.addProject}</Button>
       </Wrap>
     </>
   );

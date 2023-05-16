@@ -1,15 +1,16 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { InputLabel } from "../input/styles";
 import { Radio } from "../radio";
 import { Wrap } from "../wrap";
 import { RadioInputProps } from "./types";
 
 export const RadioInput: React.FC<RadioInputProps> = (props) => {
-  const { choices, onChange, value } = props;
+  const { choices, onChange, value, name } = props;
   const isChecked = (choice: string) => value === choice;
 
   const handleClick = (choice: string) => () => {
-    onChange && onChange({ target: { value: choice } });
+    const eventData = { target: { value: choice, name } };
+    onChange && onChange(eventData as ChangeEvent<HTMLInputElement>);
   };
 
   return (

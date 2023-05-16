@@ -1,3 +1,4 @@
+import { ChangeEventHandler } from "react";
 import { InputProps } from "../input/types";
 
 export type ChipInputChangeEvent = {
@@ -6,7 +7,8 @@ export type ChipInputChangeEvent = {
   }
 }
 export type ChipInputProps = Pick<InputProps, "label"> & {
+  name?: string;
   value?: string;
   choices?: string[];
-  onChange?: (chipInputChangeEvent?: ChipInputChangeEvent) => void;
+  onChange?: ChangeEventHandler<HTMLInputElement>
 };

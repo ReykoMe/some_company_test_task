@@ -10,6 +10,7 @@ export const RadioContainer = styled.div`
   max-width: max-content;
   min-width: 1.2rem;
   min-height: 1.2rem;
+  cursor: pointer;
   border: ${({ theme }) => `1px solid ${theme.colors.border.input}`}
   
 `

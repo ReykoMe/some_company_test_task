@@ -1,9 +1,8 @@
 import { ChipInputChangeEvent } from '../chip-input/types';
+import { BaseInputProps } from '../input/types';
 
 export type RadioInputChangeEvent = ChipInputChangeEvent;
 
-export type RadioInputProps = {
-  value?: string;
+export type RadioInputProps = BaseInputProps &  {
   choices?: string[];
-  onChange?: (radioInputEvent: RadioInputChangeEvent) => void;
 };

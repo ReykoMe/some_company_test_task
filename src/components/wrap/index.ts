@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { CSSProperties } from "react";
+import { WrapProps } from "./types";
 
-export const Wrap = styled.div<{ sx?: CSSProperties }>(({ sx }) => ({
+export const Wrap = styled.div<WrapProps>(({ sx }) => ({
   display: "flex",
   ...sx,
 }));

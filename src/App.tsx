@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import { MainLayout } from "./features/main-layout";
 import { SidebarContent } from "./features/sidebar-content";
 import { AddNewProject } from "./features/main-form/form-screens/add-new-project";
@@ -11,6 +10,7 @@ import { Wrap } from "./components/wrap";
 import { useMediaQuery } from "./hooks/use-media-query";
 import { useCounter } from "./hooks/use-couter";
 import { translations } from "./settings/translations";
+import { FormDataType } from "./features/main-form/form-screens/types";
 
 const {stepper, createProject, projectDetails} = translations.us.projectForm
 
@@ -30,16 +30,6 @@ const formScreens = [
 ];
 
 const STEPS = formScreens.map((el) => el.title);
-
-type FormDataType = {
-  projectName: string;
-  projectUrl: string;
-  projectType: string;
-  goals: string;
-  workersCount: string;
-  postProductLaunches: string;
-  contactEmail: string;
-};
 
 const defaultValues: Partial<FormDataType> = {
   contactEmail: "mail@mail.com",

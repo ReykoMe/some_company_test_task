@@ -5,3 +5,13 @@ export type FormScreenProps = UseFormReturnType & {
   onClickPrev?: VoidFunction;
   isMobile?: boolean
 };
+
+export type FormDataType = {
+  projectName: string;
+  projectUrl: string;
+  projectType: string;
+  goals: string;
+  workersCount: string;
+  postProductLaunches: string;
+  contactEmail: string;
+};

@@ -9,6 +9,7 @@ import { MainLayout } from "./features/main-layout";
 import { SidebarContent } from "./features/sidebar-content";
 import { ChipInput } from "./components/chip-input";
 import {RadioInput} from './components/radio-input/index';
+import { Typography } from "./components/typography";
 const STEPS = ["Start First Project", "Project Details", "Create Project"];
 
 const TYPE_CHOICES = [
@@ -41,8 +42,8 @@ const App: React.FC = () => {
     <MainLayout
       sidebar={<SidebarContent steps={STEPS} currentStep={currentStep} />}
     >
-      <span>To Create Quest you need firstly create Project</span>
-      <h2>Add New Project</h2>
+      <Typography color="tertiary">To Create Quest you need firstly create Project</Typography>
+      <Typography component="h2">Add New Project</Typography>
       <Input label="Project Name (It can be changed later)" />
       <Input
         label="Project URL (It cannot be changed after creation)"
@@ -56,8 +57,8 @@ const App: React.FC = () => {
       <Wrap sx={{ maxWidth: "32.8rem" }}>
         <Button>Add project</Button>
       </Wrap>
-      <span>Project Details</span>
-      <h2>What is your main goal with AlphaQuest?</h2>
+      <Typography color="tertiary">Project Details</Typography>
+      <Typography component="h2">What is your main goal with AlphaQuest?</Typography>
       <RadioInput choices={GOALS} value={GOALS[1]} />
       <Wrap>
         <Wrap sx={{ width: "12rem", marginRight: "3.2rem" }}>
@@ -67,8 +68,8 @@ const App: React.FC = () => {
           <Button>Continue</Button>
         </Wrap>
       </Wrap>
-      <span>Create Project</span>
-      <h2>How many full-time workers on the project?</h2>
+      <Typography color="tertiary">Create Project</Typography>
+      <Typography component="h2">How many full-time workers on the project?</Typography>
       <Wrap>
         <Wrap sx={{ width: "4.8rem" }}>
           <Button secondary>-</Button>
@@ -80,12 +81,12 @@ const App: React.FC = () => {
           <Button secondary>+</Button>
         </Wrap>
       </Wrap>
-      <h2>Are you pre or post product launch?</h2>
+      <Typography component="h2">Are you pre or post product launch?</Typography>
       <RadioInput
         choices={PRE_POST_PRODUCT_LAUNCHES}
         value={PRE_POST_PRODUCT_LAUNCHES[1]}
       />
-      <h2>Contact Email</h2>
+      <Typography component="h2">Contact Email</Typography>
       <Input />
       <Wrap>
         <Wrap sx={{ width: "12rem", marginRight: "3.2rem" }}>

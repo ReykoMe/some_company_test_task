@@ -9,6 +9,7 @@ import { Stepper } from "./components/stepper";
 import { useForm } from "./hooks/use-form";
 import { Wrap } from "./components/wrap";
 import { useMediaQuery } from "./hooks/use-media-query";
+import { useCounter } from "./hooks/use-couter";
 
 const screens = [
   { title: "Start First Project", Component: AddNewProject },
@@ -32,21 +33,19 @@ const defaultValues: Partial<FormDataType> = {
   contactEmail: "mail@mail.com",
   workersCount: "0",
   postProductLaunches: "Pre Product",
-  goals: "Grow My Community"
+  goals: "Grow My Community",
 };
 
 const App: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState<number>(0);
   const form = useForm<Partial<FormDataType>>({ defaultValues });
-  const isSmScreen = useMediaQuery('sm')
-
-  const nextStep = () =>
-    setCurrentStep((prev) => (prev < STEPS.length - 1 && ++prev) || prev);
-  const prevStep = () => setCurrentStep((prev) => (prev > 0 && --prev) || prev);
+  const isSmScreen = useMediaQuery("sm");
+  
+  const { currentStep, next, prev } = useCounter({
+    maxValue: STEPS.length - 1,
+    onLastValue: form.handleSubmit,
+  });
 
   const { Component: FormScreen } = screens[currentStep];
-  const isLastScreen = currentStep === STEPS.length - 1;
-  const handleClickNext = isLastScreen ? form.handleSubmit : nextStep;
 
   return (
     <MainLayout
@@ -57,10 +56,10 @@ const App: React.FC = () => {
           <Stepper steps={STEPS} currentStep={currentStep} isHideLabels />
         </Wrap>
       )}
-      <Wrap sx={{paddingBottom: "3rem", flexDirection: 'column'}}>
+      <Wrap sx={{ paddingBottom: "3rem", flexDirection: "column" }}>
         <FormScreen
-          onClickNext={handleClickNext}
-          onClickPrev={prevStep}
+          onClickNext={next}
+          onClickPrev={prev}
           isMobile={isSmScreen}
           {...form}
         />

@@ -18,9 +18,10 @@ html {
 
 body, #root {
   height: 100%;
+  width: 100%;
 }
 
-body, span, input {
+body, span, input, button {
   /* default font size set as 16px */
   font-size: 1.6rem;
   line-height: 2.2rem;

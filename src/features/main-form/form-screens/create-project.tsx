@@ -5,34 +5,47 @@ import { RadioInput } from "../../../components/radio-input/index";
 import { Typography } from "../../../components/typography";
 import { FormScreenProps } from "./types";
 import { CounterInput } from "../../../components/counter-input";
+import { inputWrapperStyles } from "./styles";
 
 const PRE_POST_PRODUCT_LAUNCHES = ["Pre Product", "Post Product"];
 
 export const CreateProject: React.FC<FormScreenProps> = (props) => {
-  const { onClickNext, onClickPrev, getInputProps } = props;
+  const { onClickNext, onClickPrev, getInputProps, isMobile } = props;
   return (
     <>
-      <Typography color="tertiary">Create Project</Typography>
-      <Typography component="h2">
-        How many full-time workers on the project?
-      </Typography>
-      <CounterInput {...getInputProps("workersCount")} min={0} />
-      <Typography component="h2">
-        Are you pre or post product launch?
-      </Typography>
-      <RadioInput
-        choices={PRE_POST_PRODUCT_LAUNCHES}
-        {...getInputProps("postProductLaunches")}
-      />
-      <Typography component="h2">Contact Email</Typography>
-      <Input {...getInputProps("contactEmail")} />
+      <Wrap sx={{ marginBottom: "1.6rem", flexDirection: "column" }}>
+        <Typography color="tertiary">Create Project</Typography>
+        <Typography component="h2">
+          How many full-time workers on the project?
+        </Typography>
+      </Wrap>
+      <Wrap sx={inputWrapperStyles}>
+        <CounterInput {...getInputProps("workersCount")} min={0} />
+      </Wrap>
+      <Wrap sx={{ marginBottom: "1.6rem" }}>
+        <Typography component="h2">
+          Are you pre or post product launch?
+        </Typography>
+      </Wrap>
+      <Wrap sx={inputWrapperStyles}>
+        <RadioInput
+          choices={PRE_POST_PRODUCT_LAUNCHES}
+          {...getInputProps("postProductLaunches")}
+        />
+      </Wrap>
+      <Wrap sx={{ marginBottom: "1.6rem" }}>
+        <Typography component="h2">Contact Email</Typography>
+      </Wrap>
+      <Wrap sx={inputWrapperStyles}>
+        <Input {...getInputProps("contactEmail")} />
+      </Wrap>
       <Wrap>
-        <Wrap sx={{ width: "12rem", marginRight: "3.2rem" }}>
+        <Wrap sx={{ maxWidth: isMobile ? "100%" :"12rem", marginRight: "3.2rem", width: "100%" }}>
           <Button secondary onClick={onClickPrev}>
             Back
           </Button>
         </Wrap>
-        <Wrap sx={{ width: "32.8rem" }}>
+        <Wrap sx={{ maxWidth: isMobile ? "100%" : "32.8rem", width: "100%" }}>
           <Button onClick={onClickNext}>Create project</Button>
         </Wrap>
       </Wrap>

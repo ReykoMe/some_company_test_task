@@ -2,7 +2,7 @@ import { Input } from "../input";
 import { Button } from "../button";
 import { Wrap } from "../wrap";
 import { CounterInputProps } from "./types";
-import { ChangeEvent, MouseEventHandler } from "react";
+import { ChangeEvent, ChangeEventHandler, MouseEventHandler } from "react";
 
 export const CounterInput: React.FC<CounterInputProps> = (props) => {
   const { name, onChange, value = "0", min = 0, max = 10000 } = props;
@@ -21,7 +21,14 @@ export const CounterInput: React.FC<CounterInputProps> = (props) => {
       };
       onChange && onChange(changeData as ChangeEvent<HTMLInputElement>);
       };
-
+  
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { value } = e.target
+    if (!isNaN(Number(value))) {
+      onChange && onChange(e);
+    }
+  }
+  
   return (
     <Wrap>
       <Wrap sx={{ width: "4.8rem" }}>
@@ -33,7 +40,8 @@ export const CounterInput: React.FC<CounterInputProps> = (props) => {
         <Input
           value={value}
           centerText
-          readOnly
+          name={name}
+          onChange={handleChange}
         />
       </Wrap>
       <Wrap sx={{ width: "4.8rem", height: "4.8rem" }}>

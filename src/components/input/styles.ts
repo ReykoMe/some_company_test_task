@@ -4,10 +4,11 @@ import { InputProps } from "./types";
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
-export const InputLabel = styled.span`
-  margin-bottom: 0.5rem;
+export const InputLabel = styled.span<{ noMargin?: boolean }>`
+  margin-bottom: ${({ noMargin }) => noMargin ? "0" : "0.5rem"};
 `;
 export const InputSectionWrapper = styled.div`
   display: flex;

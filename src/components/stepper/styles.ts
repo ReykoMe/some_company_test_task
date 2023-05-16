@@ -7,6 +7,7 @@ import styled from "@emotion/styled/macro";
 export const StepperPoint = styled.div`
   width: 0.8rem;
   height: 0.8rem;
+  min-width: 0.8rem;
   background: ${({ theme }) => theme.colors.background.primary.light};
   border-radius: 50%;
 `;

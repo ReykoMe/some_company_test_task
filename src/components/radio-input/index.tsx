@@ -20,7 +20,7 @@ export const RadioInput: React.FC<RadioInputProps> = (props) => {
           <Wrap sx={{marginRight: '0.8rem'}}>
             <Radio checked={isChecked(choice)} />
           </Wrap>
-          <InputLabel>{choice}</InputLabel>
+          <InputLabel noMargin>{choice}</InputLabel>
         </Wrap>
       ))}
     </Wrap>

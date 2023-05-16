@@ -21,7 +21,7 @@ export const ChipInput: React.FC<ChipInputProps> = (props) => {
       {label && <InputLabel>{label}</InputLabel>}
       <Wrap sx={{ flexWrap: "wrap" }}>
         {choices?.map((choice) => (
-          <Wrap sx={{ margin: "0.6rem 0.6rem" }}>
+          <Wrap sx={{ margin: "0.6rem 0.6rem" }} key={ choice }>
             <Chip active={isSelected(choice)} onClick={handleClick(choice)}>
               {choice}
             </Chip>

@@ -1,7 +1,7 @@
 import { Input } from "../../../components/input";
 import { Button } from "../../../components/button";
 import { Wrap } from "../../../components/wrap";
-import { RadioInput } from "../../../components/radio-input/index";
+import { RadioInput } from "../../../components/radio-input";
 import { Typography } from "../../../components/typography";
 import { FormScreenProps } from "./types";
 import { CounterInput } from "../../../components/counter-input";

@@ -19,7 +19,7 @@ export const Stepper: React.FC<StepperProps> = (props) => {
   return (
     <StepperContainer vertical={vertical}>
       {steps.map((el, index) => (
-        <StepperStack variant={getVariant(index)}>
+        <StepperStack variant={getVariant(index)} key={el}>
           <StepperStepWrapper>
             <StepperPoint />
             {!isHideLabels && <StepperStepLabel>{el}</StepperStepLabel>}

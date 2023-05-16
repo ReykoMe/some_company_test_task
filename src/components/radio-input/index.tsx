@@ -16,7 +16,7 @@ export const RadioInput: React.FC<RadioInputProps> = (props) => {
   return (
     <Wrap sx={{ flexDirection: "column" }}>
       {choices?.map((choice) => (
-        <Wrap onClick={handleClick(choice)} sx={{ margin: "1rem 0", alignItems: 'center' }}>
+        <Wrap onClick={handleClick(choice)} sx={{ margin: "1rem 0", alignItems: 'center' }} key={choice}>
           <Wrap sx={{marginRight: '0.8rem'}}>
             <Radio checked={isChecked(choice)} />
           </Wrap>

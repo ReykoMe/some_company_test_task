@@ -67,5 +67,19 @@ export const us = {
         createProject: "Create project",
       },
     },
+    summaryModal: {
+      labels: {
+        projectName: "Project name",
+        projectUrl: "Project URL",
+        projectType: "Project Category",
+        goals: "Goals",
+        workersCount: "Full time workers",
+        postProductLaunches: "Pre/Post product",
+        contactEmail: "Contact email",
+      },
+      buttons: {
+        submit: "Submit"
+      }
+    },
   },
 };

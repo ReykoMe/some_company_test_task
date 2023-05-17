@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { MainLayout } from "./features/main-layout";
 import { SidebarContent } from "./features/sidebar-content";
 import { AddNewProject } from "./features/main-form/form-screens/add-new-project";
@@ -13,21 +13,24 @@ import { translations } from "./settings/translations";
 import { FormDataType } from "./features/main-form/form-screens/types";
 import { Modal } from "./components/modal";
 import { UseModalControl } from "./hooks/use-modal-control";
+import { Typography } from "./components/typography";
+import { Button } from "./components/button";
 
-const {stepper, createProject, projectDetails} = translations.us.projectForm
+const { stepper, createProject, projectDetails, summaryModal } =
+  translations.us.projectForm;
 
 const formScreens = [
   {
     title: stepper.startFirstProject,
-    Component: AddNewProject
+    Component: AddNewProject,
   },
   {
     title: stepper.projectDetails,
-    Component: ProjectDetails
+    Component: ProjectDetails,
   },
   {
     title: stepper.createProject,
-    Component: CreateProject
+    Component: CreateProject,
   },
 ];
 
@@ -42,7 +45,7 @@ const defaultValues: Partial<FormDataType> = {
 
 const App: React.FC = () => {
   const form = useForm<Partial<FormDataType>>({ defaultValues });
-  const modal = UseModalControl()
+  const modal = UseModalControl();
   const isSmScreen = useMediaQuery("sm");
 
   const { currentStep, next, prev } = useCounter({
@@ -51,6 +54,14 @@ const App: React.FC = () => {
   });
 
   const { Component: FormScreen } = formScreens[currentStep];
+
+  const summaryModalValues = useMemo((): { label: string; value: string }[] => {
+    return Object.entries(form.values).map((el) => {
+      const [key, value] = el;
+      const label = summaryModal.labels[key as keyof FormDataType];
+      return { label, value };
+    });
+  }, [form.values]);
 
   return (
     <MainLayout
@@ -69,7 +80,23 @@ const App: React.FC = () => {
           {...form}
         />
       </Wrap>
-      <Modal open={modal.isOpen} onClose={ modal.close }>Test</Modal>
+
+      <Modal open={modal.isOpen} onClose={modal.close}>
+        <Typography component="h2">Summary imfo</Typography>
+        <Wrap sx={{ flexDirection: "column", padding: "2rem" }}>
+          {summaryModalValues.map((el) => (
+            <Wrap sx={{ flexDirection: "column", marginBottom: "2rem" }}>
+              <Typography>{el.label}:</Typography>
+              <Typography component="h2" color="tertiary">
+                {el.value}
+              </Typography>
+            </Wrap>
+          ))}
+          <Button onClick={form.handleSubmit}>
+            {summaryModal.buttons.submit}
+          </Button>
+        </Wrap>
+      </Modal>
     </MainLayout>
   );
 };

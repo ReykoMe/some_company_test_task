@@ -11,6 +11,8 @@ import { useMediaQuery } from "./hooks/use-media-query";
 import { useCounter } from "./hooks/use-couter";
 import { translations } from "./settings/translations";
 import { FormDataType } from "./features/main-form/form-screens/types";
+import { Modal } from "./components/modal";
+import { UseModalControl } from "./hooks/use-modal-control";
 
 const {stepper, createProject, projectDetails} = translations.us.projectForm
 
@@ -40,11 +42,12 @@ const defaultValues: Partial<FormDataType> = {
 
 const App: React.FC = () => {
   const form = useForm<Partial<FormDataType>>({ defaultValues });
+  const modal = UseModalControl()
   const isSmScreen = useMediaQuery("sm");
 
   const { currentStep, next, prev } = useCounter({
     maxValue: STEPS.length - 1,
-    onLastValue: form.handleSubmit,
+    onLastValue: modal.open,
   });
 
   const { Component: FormScreen } = formScreens[currentStep];
@@ -66,6 +69,7 @@ const App: React.FC = () => {
           {...form}
         />
       </Wrap>
+      <Modal open={modal.isOpen} onClose={ modal.close }>Test</Modal>
     </MainLayout>
   );
 };

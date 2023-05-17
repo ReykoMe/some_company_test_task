@@ -85,7 +85,7 @@ const App: React.FC = () => {
         <Typography component="h2">Summary imfo</Typography>
         <Wrap sx={{ flexDirection: "column", padding: "2rem" }}>
           {summaryModalValues.map((el) => (
-            <Wrap sx={{ flexDirection: "column", marginBottom: "2rem" }}>
+            <Wrap sx={{ flexDirection: "column", marginBottom: "2rem" }} key={ el.label }>
               <Typography>{el.label}:</Typography>
               <Typography component="h2" color="tertiary">
                 {el.value}

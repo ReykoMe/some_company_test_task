@@ -12,6 +12,7 @@ import { CreateProjectFormData } from "./features/create-project-form/types";
 import { Button } from "./components/button";
 import { useTranslation } from "./hooks/use-translation";
 import { CreateProjectSummary } from "./features/create-project-form/components/summary-modal";
+import { breakpoint } from "./utils/breakpoint";
 
 const STEPS = formScreens.map((el) => el.stepperTitle);
 
@@ -47,6 +48,9 @@ const App: React.FC = () => {
         sx={{
           justifyContent: "center",
           marginBottom: space(2),
+          [breakpoint("min", "sm")]: {
+            display: "none",
+          },
         }}
       >
         <Stepper steps={STEPS} currentStep={currentStep} isHideLabels />

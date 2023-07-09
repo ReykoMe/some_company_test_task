@@ -1,33 +1,44 @@
-import React, { ChangeEvent } from "react";
+import React, {
+  ChangeEvent,
+  ForwardedRef,
+  forwardRef,
+  useCallback,
+} from "react";
 import { ChipInputProps } from "./types";
-import { Wrap } from "../wrap";
 import { Chip } from "../chip";
+import { Component } from "./styles";
 import { InputLabel } from "../input/styles";
 
-export const ChipInput: React.FC<ChipInputProps> = (props) => {
-  const { value, choices, onChange, label, name } = props;
-
-  const handleClick = (choice: string) => () => {
-    const inputData = {
-      target: { value: choice, name },
+export const ChipInput: React.FC<ChipInputProps> = forwardRef(
+  (props, ref: ForwardedRef<HTMLDivElement>) => {
+    const { value, choices, onChange, label, name } = props;
+    const handleClick = (choice: string) => () => {
+      const inputData = {
+        target: { value: choice, name },
+      };
+      onChange?.(inputData as ChangeEvent<HTMLInputElement>);
     };
-    onChange && onChange(inputData as ChangeEvent<HTMLInputElement>);
-  };
 
-  const isSelected = (choice: string) => choice === value;
+    const isSelected = useCallback(
+      (choice: string) => choice === value,
+      [value]
+    );
 
-  return (
-    <Wrap sx={{ flexDirection: "column" }}>
-      {label && <InputLabel>{label}</InputLabel>}
-      <Wrap sx={{ flexWrap: "wrap" }}>
-        {choices?.map((choice) => (
-          <Wrap sx={{ margin: "0.6rem 0.6rem" }} key={ choice }>
-            <Chip active={isSelected(choice)} onClick={handleClick(choice)}>
+    return (
+      <Component.Root ref={ref}>
+        {label && <InputLabel>{label}</InputLabel>}
+        <Component.ChipsWrapper>
+          {choices?.map((choice) => (
+            <Chip
+              active={isSelected(choice)}
+              onClick={handleClick(choice)}
+              key={choice}
+            >
               {choice}
             </Chip>
-          </Wrap>
-        ))}
-      </Wrap>
-    </Wrap>
-  );
-};
+          ))}
+        </Component.ChipsWrapper>
+      </Component.Root>
+    );
+  }
+);

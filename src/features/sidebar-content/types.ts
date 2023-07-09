@@ -1,3 +1,3 @@
-import { StepperProps } from "../../components/stepper/types";
+import React from "react";
 
-export type SidebarContentProps = Pick<StepperProps, "currentStep" | "steps">
+export type SidebarContentProps = React.PropsWithChildren;

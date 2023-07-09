@@ -1,3 +1,3 @@
-import { CSSProperties } from "react"
+import { CSSObject } from "@emotion/react";
 
-export type WrapProps = { sx?: CSSProperties }
+export type WrapProps = { sx?: CSSObject };

@@ -1,5 +1,5 @@
 import { MouseEventHandler, useCallback, useEffect, useRef } from "react";
-import { ModalContainer, ModalContent } from "./styles";
+import { Component } from "./styles";
 import { ModalProps } from "./types";
 
 export const Modal: React.FC<React.PropsWithChildren<ModalProps>> = (props) => {
@@ -28,8 +28,8 @@ export const Modal: React.FC<React.PropsWithChildren<ModalProps>> = (props) => {
   }, [open]);
 
   return (
-    <ModalContainer onClick={handleModalClick} ref={containerRef} open={open}>
-      <ModalContent>{children}</ModalContent>
-    </ModalContainer>
+    <Component.Root onClick={handleModalClick} ref={containerRef} open={open}>
+      <Component.Content>{children}</Component.Content>
+    </Component.Root>
   );
 };

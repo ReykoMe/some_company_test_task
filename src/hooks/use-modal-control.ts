@@ -6,7 +6,7 @@ export type UseModalControlReturnType = {
   close: VoidFunction;
 };
 
-export function UseModalControl(): UseModalControlReturnType {
+export function useModalControl(): UseModalControlReturnType {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const open = useCallback(() => setIsOpen(true), []);
   const close = useCallback(() => setIsOpen(false), []);

@@ -1,99 +1,70 @@
-import React, { useMemo } from "react";
+import React, { useState } from "react";
 import { MainLayout } from "./features/main-layout";
 import { SidebarContent } from "./features/sidebar-content";
-import { AddNewProject } from "./features/main-form/form-screens/add-new-project";
-import { CreateProject } from "./features/main-form/form-screens/create-project";
-import { ProjectDetails } from "./features/main-form/form-screens/project-details";
 import { Stepper } from "./components/stepper";
-import { useForm } from "./hooks/use-form";
 import { Wrap } from "./components/wrap";
-import { useMediaQuery } from "./hooks/use-media-query";
 import { useCounter } from "./hooks/use-couter";
-import { translations } from "./settings/translations";
-import { FormDataType } from "./features/main-form/form-screens/types";
 import { Modal } from "./components/modal";
-import { UseModalControl } from "./hooks/use-modal-control";
-import { Typography } from "./components/typography";
+import { useModalControl } from "./hooks/use-modal-control";
+import { space } from "./utils/space";
+import { CreateProjectForm, formScreens } from "./features/create-project-form";
+import { CreateProjectFormData } from "./features/create-project-form/types";
 import { Button } from "./components/button";
+import { useTranslation } from "./hooks/use-translation";
+import { CreateProjectSummary } from "./features/create-project-form/components/summary-modal";
 
-const { stepper, createProject, projectDetails, summaryModal } =
-  translations.us.projectForm;
-
-const formScreens = [
-  {
-    title: stepper.startFirstProject,
-    Component: AddNewProject,
-  },
-  {
-    title: stepper.projectDetails,
-    Component: ProjectDetails,
-  },
-  {
-    title: stepper.createProject,
-    Component: CreateProject,
-  },
-];
-
-const STEPS = formScreens.map((el) => el.title);
-
-const defaultValues: Partial<FormDataType> = {
-  contactEmail: "mail@mail.com",
-  workersCount: "0",
-  postProductLaunches: createProject.inputs.postProductLaunchChoices[0],
-  goals: projectDetails.inputs.goalsChoices[0],
-};
+const STEPS = formScreens.map((el) => el.stepperTitle);
 
 const App: React.FC = () => {
-  const form = useForm<Partial<FormDataType>>({ defaultValues });
-  const modal = UseModalControl();
-  const isSmScreen = useMediaQuery("sm");
+  const modal = useModalControl();
+  const t = useTranslation("us");
+  const [summary, setSummary] = useState<CreateProjectFormData | null>(null);
 
   const { currentStep, next, prev } = useCounter({
     maxValue: STEPS.length - 1,
-    onLastValue: modal.open,
+    onLastValue: () => console.log("Last"),
   });
 
-  const { Component: FormScreen } = formScreens[currentStep];
+  const handleLastScreen = (values: CreateProjectFormData) => {
+    setSummary(values);
+    modal.open();
+  };
 
-  const summaryModalValues = useMemo((): { label: string; value: string }[] => {
-    return Object.entries(form.values).map((el) => {
-      const [key, value] = el;
-      const label = summaryModal.labels[key as keyof FormDataType];
-      return { label, value };
-    });
-  }, [form.values]);
+  const handleSubmit = () => {
+    console.log(summary);
+    modal.close();
+  };
 
   return (
     <MainLayout
-      sidebar={<SidebarContent steps={STEPS} currentStep={currentStep} />}
+      sidebar={
+        <SidebarContent>
+          <Stepper currentStep={currentStep} steps={STEPS} vertical />
+        </SidebarContent>
+      }
     >
-      {isSmScreen && (
-        <Wrap sx={{ justifyContent: "center", marginBottom: "2rem" }}>
-          <Stepper steps={STEPS} currentStep={currentStep} isHideLabels />
-        </Wrap>
-      )}
-      <Wrap sx={{ paddingBottom: "3rem", flexDirection: "column" }}>
-        <FormScreen
-          onClickNext={next}
-          onClickPrev={prev}
-          isMobile={isSmScreen}
-          {...form}
+      <Wrap
+        sx={{
+          justifyContent: "center",
+          marginBottom: space(2),
+        }}
+      >
+        <Stepper steps={STEPS} currentStep={currentStep} isHideLabels />
+      </Wrap>
+      <Wrap sx={{ paddingBottom: space(3), flexDirection: "column" }}>
+        <CreateProjectForm
+          currentStep={currentStep}
+          next={next}
+          prev={prev}
+          onSubmit={handleLastScreen}
         />
       </Wrap>
 
       <Modal open={modal.isOpen} onClose={modal.close}>
-        <Typography component="h2">Summary imfo</Typography>
-        <Wrap sx={{ flexDirection: "column", padding: "2rem" }}>
-          {summaryModalValues.map((el) => (
-            <Wrap sx={{ flexDirection: "column", marginBottom: "2rem" }} key={ el.label }>
-              <Typography>{el.label}:</Typography>
-              <Typography component="h2" color="tertiary">
-                {el.value}
-              </Typography>
-            </Wrap>
-          ))}
-          <Button onClick={form.handleSubmit}>
-            {summaryModal.buttons.submit}
+        {summary && <CreateProjectSummary values={summary} />}
+        <Wrap sx={{ margin: `${space(1)} ${space(2)}` }}>
+          <Button onClick={handleSubmit}>
+            {t.projectForm.summaryModal.buttons.submit}
           </Button>
         </Wrap>
       </Modal>

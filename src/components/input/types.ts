@@ -1,15 +1,11 @@
-import { ChangeEventHandler } from "react"
+import React, { ForwardedRef } from "react";
 
-export type BaseInputProps = {
-  name?: string
-  value?: string
-  onChange?: ChangeEventHandler<HTMLInputElement>
-  label?: string
-}
+export type BaseInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  label?: string;
+};
 
 export type InputProps = BaseInputProps & {
-  beforeText?: string
-  placeholder?: HTMLInputElement['placeholder']
-  readOnly?: boolean
-  centerText?: boolean
-}
+  beforeText?: string;
+  centerText?: boolean;
+  ref: ForwardedRef<HTMLInputElement>;
+};

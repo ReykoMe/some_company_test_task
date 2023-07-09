@@ -1,31 +1,30 @@
-import React from "react"
-import { StepperPoint, StepperSeparator, StepperContainer, StepperStack, StepperStepWrapper, StepperStepLabel } from "./styles"
-import { StepperProps, StepperStackProps } from "./types"
-
+import React from "react";
+import { Component } from "./styles";
+import { StepperProps, StepperStackProps } from "./types";
+const { Item } = Component;
 
 export const Stepper: React.FC<StepperProps> = (props) => {
-  const {vertical, isHideLabels, steps, currentStep } = props
+  const { vertical, isHideLabels, steps, currentStep } = props;
   const isLastStep = (index: number) => {
-    return index === steps.length - 1
-  }
+    return index === steps.length - 1;
+  };
 
-  const getVariant = (index: number): StepperStackProps['variant'] => {
-    if (index > currentStep)  return
-    return index === currentStep
-      ? "current"
-      :  "past"
-  }
+  const getVariant = (index: number): StepperStackProps["variant"] => {
+    if (index > currentStep) return;
+    return index === currentStep ? "current" : "past";
+  };
 
   return (
-    <StepperContainer vertical={vertical}>
+    <Component.Root vertical={vertical}>
       {steps.map((el, index) => (
-        <StepperStack variant={getVariant(index)} key={el}>
-          <StepperStepWrapper>
-            <StepperPoint />
-            {!isHideLabels && <StepperStepLabel>{el}</StepperStepLabel>}
-          </StepperStepWrapper>
-          {!isLastStep(index) && <StepperSeparator />}
-        </StepperStack>
+        <Item.Root variant={getVariant(index)} key={el}>
+          <Item.Content>
+            <Item.Point />
+            {!isHideLabels && <Item.Label>{el}</Item.Label>}
+          </Item.Content>
+          {!isLastStep(index) && <Item.Separator />}
+        </Item.Root>
       ))}
-    </StepperContainer>
-  );}
+    </Component.Root>
+  );
+};

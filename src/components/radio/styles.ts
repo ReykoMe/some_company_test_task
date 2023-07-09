@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const RadioContainer = styled.div`
+const Root = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,14 +11,16 @@ export const RadioContainer = styled.div`
   min-width: 1.2rem;
   min-height: 1.2rem;
   cursor: pointer;
-  border: ${({ theme }) => `1px solid ${theme.colors.border.input}`}
-  
-`
+  border: ${({ theme }) => `1px solid ${theme.colors.border.input}`};
+`;
 
-export const RadioCheckedContent = styled.div`
+const CheckedContent = styled.div`
   background: ${(props) => props.theme.colors.background.secondary.main};
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  width: 1.2rem;height: 1.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
 `;
+
+export const Component = { Root, CheckedContent };

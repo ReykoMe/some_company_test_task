@@ -4,6 +4,7 @@ import { CreateProjectFormData } from "../../types";
 import { space } from "../../../../utils/space";
 import { Wrap } from "../../../../components/wrap";
 import { Typography } from "../../../../components/typography";
+import { breakpoint } from "../../../../utils/breakpoint";
 const { labels } = translations.us.projectForm.summaryModal;
 
 const titlesMap: TitlesMap = {
@@ -23,12 +24,14 @@ export const CreateProjectSummary: React.FC<CreateProjectSummaryProps> = (
   return (
     <Wrap
       sx={{
-        maxWidth: space(70),
-        minWidth: space(50),
         padding: space(3),
         flexDirection: "column",
         width: "100%",
+        minWidth: space(50),
         gap: space(1),
+        [breakpoint("max", "sm")]: {
+          minWidth: space(20),
+        },
       }}
     >
       <Typography component="h2">Summary info</Typography>
